@@ -15,17 +15,9 @@ type TaskCardProps = {
   index:number;
 };
 
-function TaskCard({ task, handleClick, columnId, index }: TaskCardProps) {
-  const { ref, isDragging } = useSortable({
-    id: task.id,
-    index,
-    group: columnId,
-    type: "task",
-    accept: "task",
-  });
-
+function TaskCard({ task, handleClick }: TaskCardProps) {
   return (
-    <TaskCardButton ref={ref} role="button" onClick={handleClick}>
+    <TaskCardButton role="button" onClick={handleClick}>
       <TaskTitle>{task.title}</TaskTitle>
       <TaskMeta>
         {task.done} of {task.total} subtasks
