@@ -231,9 +231,9 @@ function App() {
       return withoutEditedTask.map((column) =>
         column.name === editingTask.status && taskToMove
           ? {
-            ...column,
-            tasks: [...column.tasks, taskToMove],
-          }
+              ...column,
+              tasks: [...column.tasks, taskToMove],
+            }
           : column,
       );
     });
@@ -282,85 +282,89 @@ function App() {
   }
 
   return (
-      <AppShell>
-        {sidebarOpen && (
-          <Sidebar
-            boards={boards}
-            activeBoard={activeBoard}
-            handleSelectBoard={setActiveBoard}
-            handleCreateBoard={() => setAddBoardOpen(true)}
-            handleHide={() => setSidebarOpen(false)}
-          />
-        )}
-        <MainContent>
-          <Header
-            boardName={activeBoard}
-            menuOpen={menuOpen}
-            handleAddTask={() => { }}
-            handleAddColumn={() => { }}
-            handleResetBoard={() => setColumns(initialColumns)}
-            handleToggleMenu={() => setMenuOpen((value) => !value)}
-          />
-          <Workspace>
-            <BoardArea aria-label={`${activeBoard} board`}>
-              <Columns>
-                {columns.map((column) => (
-                  <BoardColumn key={column.name} editTask={editTask} column={column} />
-                ))}
-                <NewColumnButton type="button" variant="secondary">
-                  + New Column
-                </NewColumnButton>
-              </Columns>
-              {!sidebarOpen && (
-                <ShowSidebarButton
-                  type="button"
-                  variant="primary"
-                  handleClick={() => setSidebarOpen(true)}
-                  aria-label="Show sidebar"
-                >
-                  <span>◧</span>
-                </ShowSidebarButton>
-              )}
-            </BoardArea>
-          </Workspace>
-        </MainContent>
-        {editingTask && (
-          <EditTask
-            task={editingTask}
-            statuses={columns.map((column) => column.name)}
-            handleChange={setEditingTask}
-            handleClose={() => {
-              setEditingTask(null);
-              setEditingOriginalId(null);
-            }}
-            handleDelete={() => {
-              if (editingOriginalId) {
-                setDeletingTask(editingOriginalId);
-              }
-            }}
-            handleSave={saveTask}
-          />
-        )}
-
-        {addBoardOpen && (
-          <AddNewBoard
-            handleClose={() => setAddBoardOpen(false)}
-            handleCreate={createBoard}
-          />
-        )}
-
-        {deletingTask && (
-          <DeleteTask
-            taskTitle={
-              columns
-                .flatMap((column) => column.tasks)
-                .find((task) => task.id === deletingTask)?.title ?? ""
+    <AppShell>
+      {sidebarOpen && (
+        <Sidebar
+          boards={boards}
+          activeBoard={activeBoard}
+          handleSelectBoard={setActiveBoard}
+          handleCreateBoard={() => setAddBoardOpen(true)}
+          handleHide={() => setSidebarOpen(false)}
+        />
+      )}
+      <MainContent>
+        <Header
+          boardName={activeBoard}
+          menuOpen={menuOpen}
+          handleAddTask={() => {}}
+          handleAddColumn={() => {}}
+          handleResetBoard={() => setColumns(initialColumns)}
+          handleToggleMenu={() => setMenuOpen((value) => !value)}
+        />
+        <Workspace>
+          <BoardArea aria-label={`${activeBoard} board`}>
+            <Columns>
+              {columns.map((column) => (
+                <BoardColumn
+                  key={column.name}
+                  editTask={editTask}
+                  column={column}
+                />
+              ))}
+              <NewColumnButton type="button" variant="secondary">
+                + New Column
+              </NewColumnButton>
+            </Columns>
+            {!sidebarOpen && (
+              <ShowSidebarButton
+                type="button"
+                variant="primary"
+                handleClick={() => setSidebarOpen(true)}
+                aria-label="Show sidebar"
+              >
+                <span>◧</span>
+              </ShowSidebarButton>
+            )}
+          </BoardArea>
+        </Workspace>
+      </MainContent>
+      {editingTask && (
+        <EditTask
+          task={editingTask}
+          statuses={columns.map((column) => column.name)}
+          handleChange={setEditingTask}
+          handleClose={() => {
+            setEditingTask(null);
+            setEditingOriginalId(null);
+          }}
+          handleDelete={() => {
+            if (editingOriginalId) {
+              setDeletingTask(editingOriginalId);
             }
-            handleClose={() => setDeletingTask(null)}
-            handleConfirm={confirmDeleteTask}
-          />
-        )}
-      </AppShell>
+          }}
+          handleSave={saveTask}
+        />
+      )}
+
+      {addBoardOpen && (
+        <AddNewBoard
+          handleClose={() => setAddBoardOpen(false)}
+          handleCreate={createBoard}
+        />
+      )}
+
+      {deletingTask && (
+        <DeleteTask
+          taskTitle={
+            columns
+              .flatMap((column) => column.tasks)
+              .find((task) => task.id === deletingTask)?.title ?? ""
+          }
+          handleClose={() => setDeletingTask(null)}
+          handleConfirm={confirmDeleteTask}
+        />
+      )}
+    </AppShell>
   );
 }
 

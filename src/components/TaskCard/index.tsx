@@ -12,7 +12,7 @@ type TaskCardProps = {
   task: TaskCardData;
   handleClick: () => void;
   columnId: string;
-  index:number;
+  index: number;
 };
 
 function TaskCard({ task, handleClick }: TaskCardProps) {
