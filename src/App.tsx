@@ -19,7 +19,6 @@ import DeleteTask from "./components/DeleteTask";
 import { colors } from "./styles/abstracts/variables";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-import { DragDropProvider } from "@dnd-kit/react";
 import BoardColumn from "./components/BoardColumn";
 
 export type Task = {
