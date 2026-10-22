@@ -2,17 +2,11 @@ import { useState, type FormEvent } from "react";
 import {
   AppShell,
   BoardArea,
-  ColumnDot,
-  ColumnHeading,
-  ColumnTitle,
   Columns,
   MainContent,
-  NewColumnButton,
   ShowSidebarButton,
-  TaskList,
   Workspace,
 } from "./styles";
-import TaskCard from "./components/TaskCard";
 import EditTask, { type EditTaskDraft } from "./components/EditTask";
 import AddNewBoard from "./components/AddNewBoard";
 import DeleteTask from "./components/DeleteTask";
@@ -20,6 +14,7 @@ import { colors } from "./styles/abstracts/variables";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import BoardColumn from "./components/BoardColumn";
+import NewColumnButton from "./components/NewColumnButton";
 
 export type Task = {
   id: string;
@@ -310,9 +305,7 @@ function App() {
                   column={column}
                 />
               ))}
-              <NewColumnButton type="button" variant="secondary">
-                + New Column
-              </NewColumnButton>
+              <NewColumnButton />
             </Columns>
             {!sidebarOpen && (
               <ShowSidebarButton
