@@ -3,7 +3,10 @@ import { colors } from "../../styles/abstracts/variables";
 
 export const StyledButton = styled("button", {
   shouldForwardProp: (prop) => !prop.startsWith("$"),
-})<{ variant: "primary" | "secondary" | "danger" | "card"; fullWidth: boolean }>`
+})<{
+  variant: "primary" | "secondary" | "danger" | "card";
+  fullWidth: boolean;
+}>`
   display: inline-flex;
   align-items: center;
   justify-content: center;

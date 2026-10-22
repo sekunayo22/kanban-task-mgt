@@ -17,7 +17,8 @@ export const ModalOverlay = styled.div<{ dataDisplay: boolean }>`
   justify-content: center;
   padding: 16px;
 
-  &, & * {
+  &,
+  & * {
     scrollbar-width: none;
     -ms-overflow-style: none;
   }

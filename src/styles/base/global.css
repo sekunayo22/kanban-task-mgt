@@ -18,27 +18,27 @@ input:-webkit-autofill:active {
 }
 
 /* Prevent extension overlays */
-[data-form-type='other'] {
+[data-form-type="other"] {
   position: relative;
   z-index: 1;
 }
 
 /* Disable extension autocomplete styling */
-input[data-lpignore='true'] {
+input[data-lpignore="true"] {
   background-color: transparent !important;
   color: inherit !important;
 }
 
 /* Prevent extension tooltips and overlays */
-input[spellcheck='false'] {
+input[spellcheck="false"] {
   -webkit-user-select: text;
   user-select: text;
 }
 
 /* Ensure our form elements take precedence */
-form[data-form-type='other'] input,
-form[data-form-type='other'] textarea,
-form[data-form-type='other'] select {
+form[data-form-type="other"] input,
+form[data-form-type="other"] textarea,
+form[data-form-type="other"] select {
   position: relative;
   z-index: 2;
 }
@@ -64,8 +64,8 @@ input::-webkit-calendar-picker-indicator {
 }
 
 /* Prevent extension password reveal buttons */
-input[type='password']::-ms-reveal,
-input[type='password']::-ms-clear {
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
   display: none !important;
 }
 

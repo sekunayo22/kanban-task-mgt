@@ -122,7 +122,7 @@ export const TaskList = styled.div`
   overflow-y: auto;
   padding: 0 4px 16px 0;
 `;
-export const TaskCardButton = styled(Button)`
+export const TaskCardButton = styled.div`
   width: 100%;
   min-height: 86px;
   flex: 0 0 auto;

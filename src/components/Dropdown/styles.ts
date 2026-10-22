@@ -26,7 +26,9 @@ export const DropdownControl = styled.select`
   background-position:
     calc(100% - 18px) 17px,
     calc(100% - 13px) 17px;
-  background-size: 5px 5px, 5px 5px;
+  background-size:
+    5px 5px,
+    5px 5px;
   background-repeat: no-repeat;
   color: ${colors.text};
   font-size: 12px;
