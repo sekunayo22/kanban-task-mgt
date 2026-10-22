@@ -1,5 +1,4 @@
 import { TaskCardButton, TaskMeta, TaskTitle } from "../../styles";
-import { useSortable } from "@dnd-kit/react/sortable";
 
 export type TaskCardData = {
   title: string;
