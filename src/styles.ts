@@ -155,7 +155,7 @@ export const TaskMeta = styled.p`
   line-height: 16px;
   font-weight: 700;
 `;
-export const StyledNewColumnButton = styled(Button)`
+export const StyledNewColumnButton = styled.div`
   width: 288px;
   flex: 0 0 288px;
   min-height: calc(100vh - 192px);

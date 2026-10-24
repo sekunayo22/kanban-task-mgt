@@ -15,6 +15,7 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import BoardColumn from "./components/BoardColumn";
 import NewColumnButton from "./components/NewColumnButton";
+import { DragDropProvider, type DragEndEvent } from "@dnd-kit/react";
 
 export type Task = {
   id: string;
@@ -275,7 +276,35 @@ function App() {
     setEditingOriginalId(null);
   }
 
+  const handleDragEnd = (event: DragEndEvent) => {
+    const taskId = event.operation.source?.id;
+    const columnId = event.operation.target?.id;
+
+    if(columnId !== "new-column") return;
+
+    setColumns((prevColumns: Column[]) => {
+      const task = prevColumns.flatMap(column => column.tasks).find(task => task.id === taskId);
+      if(!task) return prevColumns;
+      const updatedColumns : Column[]= prevColumns.map((column) => {
+        return {
+          ...column,
+          tasks: column.tasks.filter((task) => task.id !== taskId)
+        }
+      })
+      return [
+        ...updatedColumns,
+        {
+          id: `column-${Date.now()}`,
+          name: `New Column ${prevColumns.length + 1}`,
+          color: "#000",
+          tasks: [task]
+        }
+      ]
+    })
+
+  }
   return (
+    <DragDropProvider onDragEnd={(event) => handleDragEnd(event)}>
       <AppShell>
         {sidebarOpen && (
           <Sidebar
@@ -357,6 +386,7 @@ function App() {
           />
         )}
       </AppShell>
+      </DragDropProvider>
   );
 }
 

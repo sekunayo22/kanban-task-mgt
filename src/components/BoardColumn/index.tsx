@@ -1,3 +1,4 @@
+import { useDroppable } from "@dnd-kit/react";
 import type { Column, Task } from "../../App";
 import {
   ColumnHeading,
@@ -14,8 +15,9 @@ interface BoardColumnProps {
 }
 
 function BoardColumn({ column, editTask }: BoardColumnProps) {
+  const {ref} = useDroppable({id: column?.id});
   return (
-    <StyledBoardColumn key={column.name}>
+    <StyledBoardColumn ref={ref} key={column.name}>
       <ColumnHeading>
         <ColumnDot $color={column.color} />
         <ColumnTitle>

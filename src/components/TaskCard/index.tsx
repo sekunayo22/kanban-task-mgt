@@ -1,3 +1,4 @@
+import { useSortable } from "@dnd-kit/react/sortable";
 import { TaskCardButton, TaskMeta, TaskTitle } from "../../styles";
 
 export type TaskCardData = {
@@ -14,9 +15,10 @@ type TaskCardProps = {
   index: number;
 };
 
-function TaskCard({ task, handleClick }: TaskCardProps) {
+function TaskCard({ task, handleClick, index }: TaskCardProps) {
+  const {ref} =  useSortable({id: task?.id, index})
   return (
-    <TaskCardButton role="button" onClick={handleClick}>
+    <TaskCardButton ref={ref} role="button" onClick={handleClick}>
       <TaskTitle>{task.title}</TaskTitle>
       <TaskMeta>
         {task.done} of {task.total} subtasks
