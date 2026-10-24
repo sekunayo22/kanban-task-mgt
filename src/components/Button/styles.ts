@@ -25,10 +25,6 @@ export const StyledButton = styled("button", {
     background-color 120ms ease,
     opacity 120ms ease;
 
-  &:hover:not(:disabled) {
-    background: ${({ variant }) => (variant === "primary" ? colors.accentHover : variant === "danger" ? colors.dangerHover : variant === "card" ? colors.surface : colors.accentSubtle)};
-  }
-
   &:disabled {
     cursor: not-allowed;
     opacity: 0.55;

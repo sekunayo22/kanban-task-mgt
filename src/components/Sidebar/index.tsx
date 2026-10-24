@@ -12,8 +12,8 @@ import {
 } from "./styles";
 
 type SidebarProps = {
-  boards: string[];
-  activeBoard: string;
+  boards: string[] | undefined;
+  activeBoard: string | undefined;
   handleSelectBoard: (board: string) => void;
   handleCreateBoard: () => void;
   handleHide: () => void;
@@ -37,7 +37,7 @@ function Sidebar({
           </BoardMark>
           <BrandName>kanban</BrandName>
         </SidebarBrand>
-        <Eyebrow>All boards ({boards.length})</Eyebrow>
+        <Eyebrow>All boards {boards?.length ? `(${boards.length})` : null}</Eyebrow>
         <BoardNav aria-label="Boards">
           {boards?.map((board) => (
             <BoardLink

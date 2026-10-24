@@ -47,9 +47,6 @@ export const PrimaryButton = styled(Button)`
   color: ${colors.text};
   font-weight: 700;
   transition: background 0.15s ease;
-  &:hover {
-    background: ${colors.accentHover};
-  }
   b {
     margin-right: 8px;
     font-size: 18px;
@@ -84,10 +81,6 @@ export const KebabButton = styled(Button)`
   color: var(--muted);
   font-size: 25px;
   line-height: 24px;
-  &:hover {
-    background: transparent;
-    color: var(--text);
-  }
   @media (max-width: 760px) {
     padding-left: 16px;
   }
@@ -113,8 +106,4 @@ export const ActionMenuButton = styled(Button)`
   color: var(--muted);
   text-align: left;
   font-size: 12px;
-  &:hover {
-    background: var(--surface);
-    color: var(--text);
-  }
 `;

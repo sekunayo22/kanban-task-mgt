@@ -12,7 +12,7 @@ import {
 } from "./styles";
 
 type HeaderProps = {
-  boardName: string;
+  boardName: string | undefined;
   menuOpen: boolean;
   handleAddTask: () => void;
   handleAddColumn: () => void;

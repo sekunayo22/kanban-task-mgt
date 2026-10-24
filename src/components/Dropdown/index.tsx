@@ -5,7 +5,7 @@ type DropdownProps = {
   id?: string;
   label?: string;
   value: string;
-  options: string[];
+  options: string[] | undefined;
   handleChange: ChangeEventHandler<HTMLSelectElement>;
 };
 
@@ -14,7 +14,7 @@ function Dropdown({ id, label, value, options, handleChange }: DropdownProps) {
     <>
       {label && <DropdownLabel htmlFor={id}>{label}</DropdownLabel>}
       <DropdownControl id={id} value={value} onChange={handleChange}>
-        {options.map((option) => (
+        {options?.map((option) => (
           <option key={option} value={option}>
             {option}
           </option>

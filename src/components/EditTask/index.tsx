@@ -26,7 +26,7 @@ export type EditTaskDraft = {
 
 type EditTaskProps = {
   task: EditTaskDraft;
-  statuses: string[];
+  statuses: string[] | undefined;
   handleChange: (task: EditTaskDraft) => void;
   handleClose: () => void;
   handleDelete: () => void;

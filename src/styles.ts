@@ -166,10 +166,10 @@ export const StyledNewColumnButton = styled.div`
   color: var(--muted);
   font-size: 20px;
   font-weight: 700;
-  &:hover {
-    background: ${colors.surfaceRaised};
-    color: var(--accent);
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
   @media (max-width: 760px) {
     width: 280px;
     flex-basis: 280px;

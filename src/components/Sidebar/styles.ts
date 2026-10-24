@@ -87,10 +87,6 @@ export const BoardLink = styled(Button)<{
     transform-origin: left center;
     margin-right: -6px;
   }
-  &:hover {
-    background: ${({ $active }) => ($active ? "var(--accent)" : "transparent")};
-    color: ${({ $active }) => ($active ? colors.text : "var(--accent)")};
-  }
 `;
 export const SidebarBottom = styled.div`
   padding: 24px 24px 32px;
@@ -105,8 +101,4 @@ export const HideSidebarButton = styled(Button)`
   color: var(--muted);
   font-size: 14px;
   font-weight: 700;
-  &:hover {
-    background: transparent;
-    color: var(--accent);
-  }
 `;
