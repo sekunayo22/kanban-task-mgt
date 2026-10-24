@@ -37,13 +37,15 @@ function Sidebar({
           </BoardMark>
           <BrandName>kanban</BrandName>
         </SidebarBrand>
-        <Eyebrow>All boards {boards?.length ? `(${boards.length})` : null}</Eyebrow>
+        <Eyebrow>
+          All boards {boards?.length ? `(${boards.length})` : null}
+        </Eyebrow>
         <BoardNav aria-label="Boards">
           {boards?.map((board) => (
             <BoardLink
               key={board}
-              $active={activeBoard === board}
-              handleClick={() => handleSelectBoard(board)}
+              active={activeBoard === board}
+              onClick={() => handleSelectBoard(board)}
             >
               <BoardMark>
                 <i />
@@ -53,7 +55,7 @@ function Sidebar({
               <span>{board}</span>
             </BoardLink>
           ))}
-          <BoardLink $create handleClick={handleCreateBoard}>
+          <BoardLink create onClick={handleCreateBoard}>
             <BoardMark>
               <i />
               <i />
@@ -64,7 +66,7 @@ function Sidebar({
         </BoardNav>
       </SidebarTop>
       <SidebarBottom>
-        <HideSidebarButton handleClick={handleHide}>
+        <HideSidebarButton onClick={handleHide}>
           <span aria-hidden="true">◁</span> Hide Sidebar
         </HideSidebarButton>
       </SidebarBottom>

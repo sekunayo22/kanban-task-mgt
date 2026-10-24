@@ -32,7 +32,7 @@ function Header({
     <HeaderBar>
       <BoardTitle>{boardName}</BoardTitle>
       <HeaderActions>
-        <PrimaryButton variant="primary" handleClick={handleAddTask}>
+        <PrimaryButton variant="primary" onClick={handleAddTask}>
           <b>+</b>
           <DesktopLabel>Add New Task</DesktopLabel>
           <MobileLabel>Add Task</MobileLabel>
@@ -41,16 +41,16 @@ function Header({
           <KebabButton
             aria-label="Board actions"
             aria-expanded={menuOpen}
-            handleClick={handleToggleMenu}
+            onClick={handleToggleMenu}
           >
             ⋮
           </KebabButton>
           {menuOpen && (
             <ActionMenu>
-              <ActionMenuButton handleClick={handleAddColumn}>
+              <ActionMenuButton onClick={handleAddColumn}>
                 Add new column
               </ActionMenuButton>
-              <ActionMenuButton handleClick={handleResetBoard}>
+              <ActionMenuButton onClick={handleResetBoard}>
                 Reset sample board
               </ActionMenuButton>
             </ActionMenu>

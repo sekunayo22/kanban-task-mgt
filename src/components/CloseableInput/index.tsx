@@ -21,7 +21,7 @@ function CloseableInput({
       <RemoveButton
         type="button"
         aria-label={`Remove ${ariaLabel}`}
-        handleClick={handleClose}
+        onClick={handleClose}
       >
         ×
       </RemoveButton>

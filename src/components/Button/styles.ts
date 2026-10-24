@@ -1,9 +1,7 @@
 import styled from "@emotion/styled";
 import { colors } from "../../styles/abstracts/variables";
 
-export const StyledButton = styled("button", {
-  shouldForwardProp: (prop) => !prop.startsWith("$"),
-})<{
+export const StyledButton = styled.button<{
   variant: "primary" | "secondary" | "danger" | "card";
   fullWidth: boolean;
 }>`

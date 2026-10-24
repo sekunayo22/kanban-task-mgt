@@ -16,7 +16,7 @@ type TaskCardProps = {
 };
 
 function TaskCard({ task, handleClick, index }: TaskCardProps) {
-  const {ref} =  useSortable({id: task?.id, index})
+  const { ref } = useSortable({ id: task?.id, index });
   return (
     <TaskCardButton ref={ref} role="button" onClick={handleClick}>
       <TaskTitle>{task.title}</TaskTitle>

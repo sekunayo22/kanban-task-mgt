@@ -27,7 +27,7 @@ const Modal = ({
 
   const modalContent = (
     <ModalOverlay
-      dataDisplay={toggleModal}
+      isOpen={toggleModal}
       onClick={handleOverlayClick}
       data-testid="modal-overlay"
     >

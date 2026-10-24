@@ -98,13 +98,15 @@ export const ColumnHeading = styled.div`
   gap: 12px;
   padding-bottom: 24px;
 `;
-export const ColumnDot = styled.i<{ $color: string }>`
+export const ColumnDot = styled("i", {
+  shouldForwardProp: (prop) => prop !== "color",
+})<{ color: string }>`
   width: 12px;
   height: 12px;
   flex: 0 0 12px;
   margin-top: 2px;
   border-radius: 50%;
-  background: ${({ $color }) => $color};
+  background: ${({ color }) => color};
 `;
 export const ColumnTitle = styled.h2`
   margin: 0;
@@ -155,7 +157,7 @@ export const TaskMeta = styled.p`
   line-height: 16px;
   font-weight: 700;
 `;
-export const StyledNewColumnButton = styled.div`
+export const StyledNewColumnButton = styled.button`
   width: 288px;
   flex: 0 0 288px;
   min-height: calc(100vh - 192px);

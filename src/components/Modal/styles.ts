@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { colors, PlusJakartaSans } from "../../styles/abstracts/variables";
 
-export const ModalOverlay = styled.div<{ dataDisplay: boolean }>`
+export const ModalOverlay = styled.div<{ isOpen: boolean }>`
   font-family: ${PlusJakartaSans};
-  display: ${({ dataDisplay }) => (dataDisplay ? "flex" : "none")};
+  display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
   position: fixed;
   top: 0;
   left: 0;

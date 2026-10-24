@@ -66,8 +66,8 @@ export const BoardNav = styled.nav`
   gap: 4px;
 `;
 export const BoardLink = styled(Button)<{
-  $active?: boolean;
-  $create?: boolean;
+  active?: boolean;
+  create?: boolean;
 }>`
   width: 100%;
   height: 52px;
@@ -76,8 +76,8 @@ export const BoardLink = styled(Button)<{
   gap: 16px;
   padding: 0 24px 0 32px;
   border-radius: 0 999px 999px 0;
-  background: ${({ $active }) => ($active ? "var(--accent)" : "transparent")};
-  color: ${({ $active, $create }) => ($active ? colors.text : $create ? "var(--accent)" : "var(--muted)")};
+  background: ${({ active }) => (active ? "var(--accent)" : "transparent")};
+  color: ${({ active, create }) => (active ? colors.text : create ? "var(--accent)" : "var(--muted)")};
   text-align: left;
   font-size: 16px;
   font-weight: 700;

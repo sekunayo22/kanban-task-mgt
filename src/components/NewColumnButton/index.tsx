@@ -1,10 +1,15 @@
 import { useDroppable } from "@dnd-kit/react";
 import { StyledNewColumnButton } from "../../styles";
 
-function NewColumnButton() {
-  const {ref} = useDroppable({id: "new-column"});
+function NewColumnButton({ handleClick }: { handleClick: () => void }) {
+  const { ref } = useDroppable({ id: "new-column" });
   return (
-    <StyledNewColumnButton ref={ref}>
+    <StyledNewColumnButton
+      as="button"
+      type="button"
+      ref={ref}
+      onClick={handleClick}
+    >
       + New Column
     </StyledNewColumnButton>
   );

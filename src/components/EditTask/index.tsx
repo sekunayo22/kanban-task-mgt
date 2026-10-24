@@ -48,7 +48,7 @@ function EditTask({
           <EditDialogTitle>Edit Task</EditDialogTitle>
           <CloseButton
             type="button"
-            handleClick={handleClose}
+            onClick={handleClose}
             aria-label="Close"
           >
             ×
@@ -105,7 +105,7 @@ function EditTask({
           <AddSubtaskButton
             type="button"
             variant="secondary"
-            handleClick={() =>
+            onClick={() =>
               handleChange({ ...task, subtasks: [...task.subtasks, ""] })
             }
           >
@@ -129,7 +129,7 @@ function EditTask({
         <DeleteTaskButton
           type="button"
           variant="danger"
-          handleClick={handleDelete}
+          onClick={handleDelete}
         >
           Delete Task
         </DeleteTaskButton>

@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { StyledButton } from "./styles";
 
-type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> & {
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
   variant?: "primary" | "secondary" | "danger" | "card";
   fullWidth?: boolean;
@@ -10,6 +10,7 @@ type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> & {
 
 function Button({
   children,
+  onClick,
   variant = "secondary",
   fullWidth = false,
   handleClick,
@@ -21,7 +22,7 @@ function Button({
       type={type}
       variant={variant}
       fullWidth={fullWidth}
-      onClick={handleClick}
+      onClick={handleClick ?? onClick}
       {...buttonProps}
     >
       {children}

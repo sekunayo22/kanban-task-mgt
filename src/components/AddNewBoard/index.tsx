@@ -38,7 +38,7 @@ function AddNewBoard({ handleClose, handleCreate }: AddNewBoardProps) {
           <ModalTitle>Add New Board</ModalTitle>
           <CloseButton
             type="button"
-            handleClick={handleClose}
+            onClick={handleClose}
             aria-label="Close"
           >
             ×
@@ -79,7 +79,7 @@ function AddNewBoard({ handleClose, handleCreate }: AddNewBoardProps) {
           <AddColumnButton
             type="button"
             variant="secondary"
-            handleClick={() => setColumns((current) => [...current, ""])}
+            onClick={() => setColumns((current) => [...current, ""])}
           >
             + Add New Column
           </AddColumnButton>

@@ -15,6 +15,8 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import BoardColumn from "./components/BoardColumn";
 import NewColumnButton from "./components/NewColumnButton";
+import AddColumn from "./components/AddColumn";
+import AddTask from "./components/AddTask";
 import { DragDropProvider, type DragEndEvent } from "@dnd-kit/react";
 
 export type Task = {
@@ -33,12 +35,13 @@ export type Column = {
   tasks: Task[];
 };
 
-
 function App() {
   const [columns, setColumns] = useState<Column[] | undefined>(undefined);
   const [boards, setBoards] = useState<string[] | undefined>(undefined);
   const [activeBoard, setActiveBoard] = useState<string | undefined>(undefined);
   const [addBoardOpen, setAddBoardOpen] = useState(false);
+  const [addColumnOpen, setAddColumnOpen] = useState(false);
+  const [addTaskOpen, setAddTaskOpen] = useState(false);
   const [deletingTask, setDeletingTask] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -90,9 +93,9 @@ function App() {
       return withoutEditedTask?.map((column) =>
         column.name === editingTask.status && taskToMove
           ? {
-            ...column,
-            tasks: [...column.tasks, taskToMove],
-          }
+              ...column,
+              tasks: [...column.tasks, taskToMove],
+            }
           : column,
       );
     });
@@ -103,7 +106,7 @@ function App() {
 
   function createBoard(name: string, columnNames: string[]) {
     setBoards((current: string[] | undefined) =>
-      current?.includes(name) ? current : [...(current ?? []), name]
+      current?.includes(name) ? current : [...(current ?? []), name],
     );
 
     setActiveBoard(name);
@@ -123,6 +126,54 @@ function App() {
     );
 
     setAddBoardOpen(false);
+  }
+
+  function createColumn(name: string) {
+    const cleanName = name.trim();
+    if (!cleanName) return;
+    setColumns((current) => [
+      ...(current ?? []),
+      {
+        id: `column-${Date.now()}`,
+        name: cleanName,
+        color: [
+          colors.columnTodo,
+          colors.columnDoing,
+          colors.columnDone,
+          colors.columnAdditional,
+        ][(current?.length ?? 0) % 4],
+        tasks: [],
+      },
+    ]);
+    setAddColumnOpen(false);
+  }
+
+  function createTask(task: EditTaskDraft) {
+    setColumns((current) =>
+      current?.map((column) =>
+        column.name === task.status
+          ? {
+              ...column,
+              tasks: [
+                ...column.tasks,
+                {
+                  id: `task-${Date.now()}`,
+                  title: task.title.trim(),
+                  description: task.description,
+                  subtasks: task.subtasks
+                    .map((item) => item.trim())
+                    .filter(Boolean),
+                  total: task.subtasks
+                    .map((item) => item.trim())
+                    .filter(Boolean).length,
+                  done: 0,
+                },
+              ],
+            }
+          : column,
+      ),
+    );
+    setAddTaskOpen(false);
   }
 
   function confirmDeleteTask() {
@@ -147,26 +198,29 @@ function App() {
     if (columnId !== "new-column") return;
 
     setColumns((prevColumns: Column[] | undefined) => {
-      const task = prevColumns?.flatMap(column => column.tasks).find(task => task.id === taskId);
+      const task = prevColumns
+        ?.flatMap((column) => column.tasks)
+        .find((task) => task.id === taskId);
       if (!task) return prevColumns;
-      const updatedColumns: Column[] | undefined = prevColumns?.map((column) => {
-        return {
-          ...column,
-          tasks: column.tasks.filter((task) => task.id !== taskId)
-        }
-      })
+      const updatedColumns: Column[] | undefined = prevColumns?.map(
+        (column) => {
+          return {
+            ...column,
+            tasks: column.tasks.filter((task) => task.id !== taskId),
+          };
+        },
+      );
       return [
         ...updatedColumns!,
         {
           id: `column-${Date.now()}`,
           name: `New Column ${prevColumns!.length + 1}`,
           color: "#000",
-          tasks: [task]
-        }
-      ]
-    })
-
-  }
+          tasks: [task],
+        },
+      ];
+    });
+  };
   return (
     <DragDropProvider onDragEnd={(event) => handleDragEnd(event)}>
       <AppShell>
@@ -183,8 +237,14 @@ function App() {
           <Header
             boardName={activeBoard}
             menuOpen={menuOpen}
-            handleAddTask={() => { }}
-            handleAddColumn={() => { }}
+            handleAddTask={() => {
+              setMenuOpen(false);
+              setAddTaskOpen(true);
+            }}
+            handleAddColumn={() => {
+              setMenuOpen(false);
+              setAddColumnOpen(true);
+            }}
             handleResetBoard={() => setColumns(undefined)}
             handleToggleMenu={() => setMenuOpen((value) => !value)}
           />
@@ -198,7 +258,7 @@ function App() {
                     column={column}
                   />
                 ))}
-                <NewColumnButton />
+                <NewColumnButton handleClick={() => setAddColumnOpen(true)} />
               </Columns>
               {!sidebarOpen && (
                 <ShowSidebarButton
@@ -235,6 +295,20 @@ function App() {
           <AddNewBoard
             handleClose={() => setAddBoardOpen(false)}
             handleCreate={createBoard}
+          />
+        )}
+
+        {addColumnOpen && (
+          <AddColumn
+            handleClose={() => setAddColumnOpen(false)}
+            handleCreate={createColumn}
+          />
+        )}
+        {addTaskOpen && (
+          <AddTask
+            statuses={columns?.map((column) => column.name) ?? []}
+            handleClose={() => setAddTaskOpen(false)}
+            handleCreate={createTask}
           />
         )}
 

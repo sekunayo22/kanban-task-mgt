@@ -15,11 +15,11 @@ interface BoardColumnProps {
 }
 
 function BoardColumn({ column, editTask }: BoardColumnProps) {
-  const {ref} = useDroppable({id: column?.id});
+  const { ref } = useDroppable({ id: column?.id });
   return (
     <StyledBoardColumn ref={ref} key={column.name}>
       <ColumnHeading>
-        <ColumnDot $color={column.color} />
+        <ColumnDot color={column.color} />
         <ColumnTitle>
           {column.name} ({column.tasks.length})
         </ColumnTitle>
