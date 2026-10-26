@@ -13,15 +13,15 @@ import {
 
 export default function AddColumn({
   handleClose,
-  handleCreate,
 }: {
   handleClose: () => void;
-  handleCreate: (name: string) => void;
 }) {
   const [name, setName] = useState("");
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (name.trim()) handleCreate(name);
+    if (name.trim()) {
+      console.log("");
+    }
   }
   return (
     <Modal toggleModal handleClose={handleClose}>

@@ -37,7 +37,7 @@ export type Column = {
 };
 
 function App() {
-  const [boards, setBoards] = useState<BoardResponse[] | []>([])
+  const [boards, setBoards] = useState<BoardResponse[] | []>([]);
   const [columns, setColumns] = useState<Column[] | undefined>(undefined);
   const [activeBoard, setActiveBoard] = useState<BoardResponse | undefined>(
     undefined,
@@ -72,29 +72,9 @@ function App() {
   }
 
   function handleCreateBoard(name: string, columnNames: string[]) {
-    setActiveBoard({name, columns: columnNames, id: Date.now()});
+    setActiveBoard({ name, columns: columnNames, id: Date.now() });
 
     setAddBoardOpen(false);
-  }
-
-  function createColumn(name: string) {
-    const cleanName = name.trim();
-    if (!cleanName) return;
-    setColumns((current) => [
-      ...(current ?? []),
-      {
-        id: `column-${Date.now()}`,
-        name: cleanName,
-        color: [
-          colors.columnTodo,
-          colors.columnDoing,
-          colors.columnDone,
-          colors.columnAdditional,
-        ][(current?.length ?? 0) % 4],
-        tasks: [],
-      },
-    ]);
-    setAddColumnOpen(false);
   }
 
   function confirmDeleteTask() {
@@ -105,111 +85,107 @@ function App() {
     setEditingOriginalId(null);
   }
 
-
   return (
-      <DragDropProvider>
-        <AppShell>
-          {sidebarOpen && (
-            <Sidebar
-              boards={boards}
-              activeBoard={activeBoard}
-              handleSelectBoard={setActiveBoard}
-              handleCreateBoard={() => setAddBoardOpen(true)}
-              handleHide={() => setSidebarOpen(false)}
-            />
-          )}
-          <MainContent>
-            <Header
-              boardName={activeBoard?.name}
-              menuOpen={menuOpen}
-              handleAddTask={() => {
-                setMenuOpen(false);
-                setAddTaskOpen(true);
-              }}
-              handleAddColumn={() => {
-                setMenuOpen(false);
-                setAddColumnOpen(true);
-              }}
-              handleResetBoard={() => setColumns(undefined)}
-              handleToggleMenu={() => setMenuOpen((value) => !value)}
-            />
-            <Workspace>
-              <BoardArea aria-label={`${activeBoard} board`}>
-                <Columns>
-                  {columns?.map((column) => (
-                    <BoardColumn
-                      key={column.name}
-                      editTask={editTask}
-                      column={column}
-                    />
-                  ))}
-                  <NewColumnButton handleClick={() => setAddColumnOpen(true)} />
-                </Columns>
-                {!sidebarOpen && (
-                  <ShowSidebarButton
-                    type="button"
-                    variant="primary"
-                    handleClick={() => setSidebarOpen(true)}
-                    aria-label="Show sidebar"
-                  >
-                    <span>◧</span>
-                  </ShowSidebarButton>
-                )}
-              </BoardArea>
-            </Workspace>
-          </MainContent>
-          {editingTask && (
-            <EditTask
-              task={editingTask}
-              statuses={columns?.map((column) => column.name)}
-              handleChange={setEditingTask}
-              handleClose={() => {
-                setEditingTask(null);
-                setEditingOriginalId(null);
-              }}
-              handleDelete={() => {
-                if (editingOriginalId) {
-                  setDeletingTask(editingOriginalId);
-                }
-              }}
-              handleSave={saveTask}
-            />
-          )}
-
-          {addBoardOpen && (
-            <AddNewBoard
-              handleClose={() => setAddBoardOpen(false)}
-              handleCreate={handleCreateBoard}
-            />
-          )}
-
-          {addColumnOpen && (
-            <AddColumn
-              handleClose={() => setAddColumnOpen(false)}
-              handleCreate={createColumn}
-            />
-          )}
-          {addTaskOpen && (
-            <AddTask
-              statuses={columns?.map((column) => column.name) ?? []}
-              handleClose={() => setAddTaskOpen(false)}
-              boardId={1}
-            />
-          )}
-
-          {deletingTask && (
-            <DeleteTask
-              taskTitle={
-                columns
-                  ?.flatMap((column) => column.tasks)
-                  .find((task) => task.id === deletingTask)?.title ?? ""
+    <DragDropProvider>
+      <AppShell>
+        {sidebarOpen && (
+          <Sidebar
+            boards={boards}
+            activeBoard={activeBoard}
+            handleSelectBoard={setActiveBoard}
+            handleCreateBoard={() => setAddBoardOpen(true)}
+            handleHide={() => setSidebarOpen(false)}
+          />
+        )}
+        <MainContent>
+          <Header
+            boardName={activeBoard?.name}
+            menuOpen={menuOpen}
+            handleAddTask={() => {
+              setMenuOpen(false);
+              setAddTaskOpen(true);
+            }}
+            handleAddColumn={() => {
+              setMenuOpen(false);
+              setAddColumnOpen(true);
+            }}
+            handleResetBoard={() => setColumns(undefined)}
+            handleToggleMenu={() => setMenuOpen((value) => !value)}
+          />
+          <Workspace>
+            <BoardArea aria-label={`${activeBoard} board`}>
+              <Columns>
+                {columns?.map((column) => (
+                  <BoardColumn
+                    key={column.name}
+                    editTask={editTask}
+                    column={column}
+                  />
+                ))}
+                <NewColumnButton handleClick={() => setAddColumnOpen(true)} />
+              </Columns>
+              {!sidebarOpen && (
+                <ShowSidebarButton
+                  type="button"
+                  variant="primary"
+                  handleClick={() => setSidebarOpen(true)}
+                  aria-label="Show sidebar"
+                >
+                  <span>◧</span>
+                </ShowSidebarButton>
+              )}
+            </BoardArea>
+          </Workspace>
+        </MainContent>
+        {editingTask && (
+          <EditTask
+            task={editingTask}
+            statuses={columns?.map((column) => column.name)}
+            handleChange={setEditingTask}
+            handleClose={() => {
+              setEditingTask(null);
+              setEditingOriginalId(null);
+            }}
+            handleDelete={() => {
+              if (editingOriginalId) {
+                setDeletingTask(editingOriginalId);
               }
-              handleClose={() => setDeletingTask(null)}
-              handleConfirm={confirmDeleteTask}
-            />
-          )}
-        </AppShell>
-      </DragDropProvider>
+            }}
+            handleSave={saveTask}
+          />
+        )}
+
+        {addBoardOpen && (
+          <AddNewBoard
+            handleClose={() => setAddBoardOpen(false)}
+            handleCreate={handleCreateBoard}
+          />
+        )}
+
+        {addColumnOpen && (
+          <AddColumn handleClose={() => setAddColumnOpen(false)} />
+        )}
+        {addTaskOpen && (
+          <AddTask
+            statuses={columns?.map((column) => column.name) ?? []}
+            handleClose={() => setAddTaskOpen(false)}
+            boardId={1}
+          />
+        )}
+
+        {deletingTask && (
+          <DeleteTask
+            taskTitle={
+              columns
+                ?.flatMap((column) => column.tasks)
+                .find((task) => task.id === deletingTask)?.title ?? ""
+            }
+            handleClose={() => setDeletingTask(null)}
+            handleConfirm={confirmDeleteTask}
+          />
+        )}
+      </AppShell>
+    </DragDropProvider>
   );
 }
 
