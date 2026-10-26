@@ -17,7 +17,6 @@ import NewColumnButton from "./components/NewColumnButton";
 import AddColumn from "./components/AddColumn";
 import AddTask from "./components/AddTask";
 import { DragDropProvider } from "@dnd-kit/react";
-import { colors } from "./styles/abstracts/variables";
 import type { BoardResponse } from "./models/board";
 
 export type Task = {
