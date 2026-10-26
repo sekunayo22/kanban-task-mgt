@@ -28,11 +28,7 @@ export default function AddColumn({
       <BoardModal onSubmit={submit}>
         <ModalHeader>
           <ModalTitle>Add New Column</ModalTitle>
-          <CloseButton
-            type="button"
-            onClick={handleClose}
-            aria-label="Close"
-          >
+          <CloseButton type="button" onClick={handleClose} aria-label="Close">
             ×
           </CloseButton>
         </ModalHeader>

@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from "react";
-import type { EditTaskDraft } from "../EditTask";
 import Input from "../Input";
 import Textarea from "../Textarea";
 import Dropdown from "../Dropdown";
@@ -12,36 +11,33 @@ import {
   FieldGroup,
   SubmitButton,
 } from "../EditTask/styles";
+import type { AddTaskRequest } from "../../models/task";
 
 export default function AddTask({
   statuses,
   handleClose,
-  handleCreate,
+  boardId,
 }: {
   statuses: string[];
   handleClose: () => void;
-  handleCreate: (task: EditTaskDraft) => void;
+  boardId: number;
 }) {
-  const [task, setTask] = useState<EditTaskDraft>({
+  const [task, setTask] = useState<AddTaskRequest>({
     title: "",
     description: "",
     subtasks: [],
     status: statuses[0] ?? "",
+    boardId: boardId,
   });
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (task.title.trim() && task.status) handleCreate(task);
   }
   return (
     <Modal toggleModal handleClose={handleClose}>
       <EditTaskDialog onSubmit={submit}>
         <EditDialogHeader>
           <EditDialogTitle>Add New Task</EditDialogTitle>
-          <CloseButton
-            type="button"
-            onClick={handleClose}
-            aria-label="Close"
-          >
+          <CloseButton type="button" onClick={handleClose} aria-label="Close">
             ×
           </CloseButton>
         </EditDialogHeader>
@@ -77,11 +73,13 @@ export default function AddTask({
             }
           />
         </FieldGroup>
-      {statuses.length === 0 && (
-        <FieldGroup>
-          <p role="status">Add a column to this board before creating a task.</p>
-        </FieldGroup>
-      )}
+        {statuses.length === 0 && (
+          <FieldGroup>
+            <p role="status">
+              Add a column to this board before creating a task.
+            </p>
+          </FieldGroup>
+        )}
         <SubmitButton
           type="submit"
           variant="primary"

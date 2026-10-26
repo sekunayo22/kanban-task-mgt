@@ -36,11 +36,7 @@ function AddNewBoard({ handleClose, handleCreate }: AddNewBoardProps) {
       <BoardModal onSubmit={submit}>
         <ModalHeader>
           <ModalTitle>Add New Board</ModalTitle>
-          <CloseButton
-            type="button"
-            onClick={handleClose}
-            aria-label="Close"
-          >
+          <CloseButton type="button" onClick={handleClose} aria-label="Close">
             ×
           </CloseButton>
         </ModalHeader>

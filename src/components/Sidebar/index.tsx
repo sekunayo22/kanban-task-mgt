@@ -1,3 +1,4 @@
+import type { BoardResponse } from "../../models/board";
 import {
   BoardLink,
   BoardMark,
@@ -12,9 +13,9 @@ import {
 } from "./styles";
 
 type SidebarProps = {
-  boards: string[] | undefined;
-  activeBoard: string | undefined;
-  handleSelectBoard: (board: string) => void;
+  boards: BoardResponse[] | undefined;
+  activeBoard: BoardResponse | undefined;
+  handleSelectBoard: (board: BoardResponse) => void;
   handleCreateBoard: () => void;
   handleHide: () => void;
 };
@@ -43,8 +44,8 @@ function Sidebar({
         <BoardNav aria-label="Boards">
           {boards?.map((board) => (
             <BoardLink
-              key={board}
-              active={activeBoard === board}
+              key={board?.id}
+              active={activeBoard?.name === board?.name}
               onClick={() => handleSelectBoard(board)}
             >
               <BoardMark>
@@ -52,7 +53,7 @@ function Sidebar({
                 <i />
                 <i />
               </BoardMark>
-              <span>{board}</span>
+              <span>{board?.name}</span>
             </BoardLink>
           ))}
           <BoardLink create onClick={handleCreateBoard}>

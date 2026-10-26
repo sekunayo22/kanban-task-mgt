@@ -46,11 +46,7 @@ function EditTask({
       <EditTaskDialog onSubmit={handleSave}>
         <EditDialogHeader>
           <EditDialogTitle>Edit Task</EditDialogTitle>
-          <CloseButton
-            type="button"
-            onClick={handleClose}
-            aria-label="Close"
-          >
+          <CloseButton type="button" onClick={handleClose} aria-label="Close">
             ×
           </CloseButton>
         </EditDialogHeader>
@@ -126,11 +122,7 @@ function EditTask({
         <SubmitButton type="submit" variant="primary">
           Save Changes
         </SubmitButton>
-        <DeleteTaskButton
-          type="button"
-          variant="danger"
-          onClick={handleDelete}
-        >
+        <DeleteTaskButton type="button" variant="danger" onClick={handleDelete}>
           Delete Task
         </DeleteTaskButton>
       </EditTaskDialog>
