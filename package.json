@@ -14,9 +14,11 @@
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@reduxjs/toolkit": "^2.13.0",
     "@uidotdev/usehooks": "^2.4.1",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "react-redux": "^9.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

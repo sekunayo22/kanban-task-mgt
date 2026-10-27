@@ -18,6 +18,7 @@ import AddColumn from "./components/AddColumn";
 import AddTask from "./components/AddTask";
 import { DragDropProvider } from "@dnd-kit/react";
 import type { BoardResponse } from "./models/board";
+import { useCreateBoardMutation, useGetBoardsQuery } from "./services/board";
 
 export type Task = {
   id: string;
@@ -29,14 +30,15 @@ export type Task = {
 };
 
 export type Column = {
-  id: string;
+  id: number;
   name: string;
   color: string;
   tasks: Task[];
 };
 
 function App() {
-  const [boards, setBoards] = useState<BoardResponse[] | []>([]);
+  const { data: boards } = useGetBoardsQuery();
+  const [createBoard] = useCreateBoardMutation();
   const [columns, setColumns] = useState<Column[] | undefined>(undefined);
   const [activeBoard, setActiveBoard] = useState<BoardResponse | undefined>(
     undefined,
@@ -71,8 +73,11 @@ function App() {
   }
 
   function handleCreateBoard(name: string, columnNames: string[]) {
-    setActiveBoard({ name, columns: columnNames, id: Date.now() });
-
+    createBoard({ name, columns: columnNames })
+      .unwrap()
+      .then((res) => {
+        setActiveBoard(res);
+      });
     setAddBoardOpen(false);
   }
 
@@ -114,11 +119,16 @@ function App() {
           <Workspace>
             <BoardArea aria-label={`${activeBoard} board`}>
               <Columns>
-                {columns?.map((column) => (
+                {activeBoard?.columns?.map((column, index) => (
                   <BoardColumn
-                    key={column.name}
+                    key={index + 1}
                     editTask={editTask}
-                    column={column}
+                    column={{
+                      name: column,
+                      id: Date.now(),
+                      tasks: [],
+                      color: "#000"
+                    }}
                   />
                 ))}
                 <NewColumnButton handleClick={() => setAddColumnOpen(true)} />

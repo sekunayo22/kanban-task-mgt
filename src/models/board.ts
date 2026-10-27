@@ -8,3 +8,7 @@ export type AddBoardRequest = {
   name: string;
   columns: Array<string>;
 };
+
+export type AddColumnRequest = {
+  name: string;
+};

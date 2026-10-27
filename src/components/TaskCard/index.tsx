@@ -11,7 +11,7 @@ export type TaskCardData = {
 type TaskCardProps = {
   task: TaskCardData;
   handleClick: () => void;
-  columnId: string;
+  columnId: number;
   index: number;
 };
 
